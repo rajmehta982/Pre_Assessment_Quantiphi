@@ -1,0 +1,10 @@
+Consider a text file which has multi-lines text, output all the lines which has a specific word and also output the total number of occurrences of that word
+
+Count number of occurences of the word
+
+grep -o -i word example.txt | wc -l
+
+word : specific word you want to find occurrences of 
+example.txt: name of the text file
+
+

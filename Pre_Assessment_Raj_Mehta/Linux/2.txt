@@ -1,0 +1,6 @@
+
+Search for all the files that have a ‘.txt’ extension in the current working directory
+
+Command
+cd <your working directory>
+find -name *.txt

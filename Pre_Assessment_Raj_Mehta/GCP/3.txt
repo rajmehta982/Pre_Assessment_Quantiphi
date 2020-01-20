@@ -1,0 +1,28 @@
+Steps to create bucket and transfer files from local to GCS using gsutil
+
+
+1.	Open the Cloud Storage browser in the Google Cloud Console.
+
+2.	Click Create bucket to open the bucket creation form.
+ 
+3.	Enter your bucket information and click Continue to complete each step:
+•	Enter a unique Name for your bucket.
+•	Do not include sensitive information in the bucket name, because the bucket namespace is global and publicly visible.
+▸See bucket naming requirements.
+•	Choose Standard for Storage class and us-east1 (South Carolina) for Location.
+•	Choose Set object-level and bucket-level permissions for Access control model.
+4.	Click Create.
+
+
+Transfer files from local storage to GCS using gsutil
+
+Use the following command to upload a file from your local computer to your Google Cloud Storage bucket
+gsutil cp local-location/filename gs://bucketname/
+
+You can use the -r option to upload a folder.
+gsutil cp -r folder-name gs://bucketname/
+
+You can also use the -m option to upload large number of files which performs a parallel (multi-threaded/multi-processing) copy.
+gsutil -m cp -r folder-name gs://bucketname
+
+

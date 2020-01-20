@@ -1,0 +1,45 @@
+Steps to create VPC and Subnets
+Creating an auto mode network
+1.	Go to the VPC networks page in the Google Cloud Console.
+2.	Click Create VPC network.
+3.	Enter a Name for the network.
+4.	Choose Automatic for the Subnet creation mode.
+5.	In the Firewall rules section, select one or more predefined firewall rules that address common use cases for connectivity to VMs. If you don't want to use them, select no rules. You can create your own firewall rules after you create the network.
+6.	Choose the Dynamic routing mode for the VPC network.
+For more information, see dynamic routing mode. You can change the dynamic routing mode later.
+7.	Click Create.
+
+
+Create custom mode network
+1.	Go to the VPC networks page in the Google Cloud Console.
+2.	Click Create VPC network.
+3.	Enter a Name for the network.
+4.	Choose Custom for the Subnet creation mode.
+
+5.	In the New subnet section, specify the following configuration parameters for a subnet:
+a.	Provide a Name for the subnet.
+b.	Select a Region.
+c.	Enter an IP address range. This is the primary IP range for the subnet.
+d.	To define a secondary range for the subnet, click Create secondary IP range.
+e.	Private Google access: Choose whether to enable Private Google Access for the subnet when you create it or later by editing it.
+f.	Flow logs: Choose whether to enable VPC flow logs for the subnet when you create it or later by editing it.
+g.	Click Done.
+
+6.	To add more subnets, click Add subnet and repeat the previous steps. You can also add more subnets to the network after you have created the network.
+7.	Choose the Dynamic routing mode for the VPC network.
+For more information, see dynamic routing mode. You can change the dynamic routing mode later.
+8.	Click Create.
+
+Creating Subnets:
+
+1.	Go to the VPC networks page in the Google Cloud Console.
+2.	Click the name a VPC network to show its VPC network details page.
+3.	Click Add subnet. In the panel that appears:
+a.	Provide a Name.
+b.	Select a Region.
+c.	Enter an IP address range. This is the primary IP range for the subnet.
+d.	To define a secondary range for the subnet, click Create secondary IP range.
+e.	Private Google access: You can enable Private Google Access for the subnet when you create it or later by editing it.
+f.	Flow logs: You can enable VPC flow logs for the subnet when you create it or later by editing it.
+g.	Click Add.
+

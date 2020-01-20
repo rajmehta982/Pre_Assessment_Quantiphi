@@ -1,0 +1,46 @@
+Steps to create a service account and add IAM roles which grants access to GCE and GCS only
+Creating a Service Account: 
+Step 1: Create a project
+1.	Go to the Google Cloud Platform (GCP) Console and sign in as a super administrator. Choose an option: 
+•	If you haven't used the GCP Console before, agree to the Terms of Service and click Create Project.
+•	If you have used GCP Console before, at the top of the screen next to your most recent project name, click Down   to open your projects list. Then, click New Project.
+2.	Enter a project name and click Create.
+Step 2: Enable the APIs for the service account
+1.	In the top-left corner of the GCP console, click Menu     APIs & Services   Library.
+2.	For each API you require, click the API name and then Enable.
+3.	To enable another API, click Back  .
+You'll return to the API Library.
+4.	Repeat step 2, as required.
+Step 3: Create the service account
+1.	In the top-left corner of the GCP console, click Menu  .
+2.	Click IAM & Admin   Service accounts.
+3.	Click Create Service Account and in the Service account name field, enter a name for the service account. 
+4.	(Optional) Enter a description of the service account.
+5.	Click Create.
+6.	(Optional) Assign the role of Project viewer to the new account.
+7.	Click Continue   Create Key.
+8.	Ensure the key type is set to JSON and click Create.
+You'll see a message that the service account JSON file has been downloaded to your computer.
+9.	Make a note of the location and name of this file.
+You will need it later.
+10.	Click Close   Done.
+11.	In the list of service accounts, click the email address that relates to the service account you created and click Edit. 
+12.	Click View Domain Wide Delegation Client ID.
+13.	In the Product name for the consent screen field, enter a product name.
+14.	In the Email address field, use the default email address or assign a new email address.
+15.	Click Save.
+16.	If you are installing GSMME or GSPS, copy the Client ID value.
+You will need this later.
+
+Creating IAM Roles to grant access to GCE and GCS only
+1.	Open the IAM page in the Cloud Console. Open the IAM page.
+2.	Locate the member to whom you want to grant another role, and click Edit edit.
+3.	In the Edit permissions pane, click Add another role.
+4.	From the Select a role drop-down menu, select Project and then Viewer. Click Save.
+For GCE Access, grant the predefined compute admin role:
+roles/compute.admin
+For GCS Access, grant the predefined compute admin role:
+roles/storage.admin
+
+
+

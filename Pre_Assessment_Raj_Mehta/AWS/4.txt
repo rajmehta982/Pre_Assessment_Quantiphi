@@ -1,0 +1,70 @@
+Steps for Hosting a Static Website on Amazon S3
+1. Naming Your S3 Bucket.
+If your website domain is www.my-awesome-site.com, then your bucket name must be www.my-awesome-site.com.
+The reasoning for this has to do with how requests are routed to S3. The request comes into the bucket, and then S3 uses the Host header in the request to route to the appropriate bucket.
+Host: www.my-awesome-site.com
+
+
+2. Configuring Your S3 Bucket for Static Website Hosting
+Turning on static website hosting for your bucket -
+•	Navigate to S3 in the AWS Console.
+•	Click into your bucket.
+•	Click the “Properties” section.
+•	Click the “Static website hosting” option.
+•	Select “Use this bucket to host a website”.
+•	Enter “index.html” as the Index document.
+Or if you are all about command lines and would rather not have a graphical user interface (GUI) in your way, this AWS CLI command turns website hosting on for your bucket.
+
+aws s3 website s3://www.my-awesome-site.com/ --index-document index.html --error-document error.html
+Your bucket is configured for static website hosting, and you now have an S3 website url like this 
+http://www.my-awesome-site.com.s3-website-us-east-1.amazonaws.com/.
+Your bucket serves your static website, so it must be accessible to anyone in the world. This is referred to as anonymous access to the bucket.
+By default, any new buckets created in an AWS account deny you the ability to add a public access bucket policy. This is in response to the recent leaky buckets where private information has been exposed to bad actors. However, for our use case, we need a public access bucket policy. To allow this you must complete the following steps before adding your bucket policy.
+1.	Click into your bucket.
+2.	Select the “Permissions” tab at the top.
+3.	Under “Public Access Settings” we want to click “Edit”.
+4.	Change “Block new public bucket policies”, “Block public and cross-account access if bucket has public policies”, and “Block new public ACLs and uploading public objects” to be false and Save.
+You must complete this step before adding the bucket policy to your static website bucket.
+Now you must update the Bucket Policy of your bucket to have public read access to anyone in the world. The steps to update the policy of your bucket in the AWS Console are as follows:
+•	Navigate to S3 in the AWS Console.
+•	Click into your bucket.
+•	Click the “Permissions” section.
+•	Select “Bucket Policy”.
+•	Add the following Bucket Policy and then Save
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForPublicWebsiteContent",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::www.my-awesome-site.com/*"
+        }
+    ]
+}
+Or for the command line fans out there, if policy.json is the above bucket policy, then use:
+
+aws s3api put-bucket-policy --bucket www.my-awesome-site.com --policy file://policy.json
+It is important to note the "Principal": { "AWS": "*" }section of the bucket policy. This part of the policy opens up your bucket to anyone in the world. Any object in this bucket is available to the public via the S3 website url. Don’t put anything in this bucket that you’re not willing to share with the world.
+
+
+3. Adding A CNAME Record For Your Bucket Url
+You have a bucket that is configured for static website hosting. It has an S3 website url. You understand that this bucket is accessible to the world? You are cruising right through this.
+In order for a user to load your S3 website you’ll need to provide mapping from your domain name www.my-awesome-site.com, to your S3 website url www.my-awesome-site.com.s3-website-us-east-1.amazonaws.com. This mapping is often referred to as a CNAME record inside of your Domain Name Servers (DNS) records.
+
+www.my-awesome-site.com CNAME www.my-awesome-site.com.s3-website-us-east-1.amazonaws.com
+The process to complete this step varies depending on who your DNS provider is. In general this is what you are looking for within your DNS provider:
+•	Create a record for a host like  www
+•	The record type must be CNAME (Canonical name)
+•	The value must be your S3 website url 
+•	www.my-awesome-site.com.s3-website-us-east-1.amazonaws.com
+
+
+4. Uploading Your Static Website
+Your bucket is configured for static website hosting. You have a CNAME record in your DNS records that resolves to the S3 website url? Awesome, it’s showtime then.
+Remember S3 is a flat object store, which means each object in the bucket represents a key without any hierarchy. While the AWS S3 Console makes you believe there is a directory structure, there isn’t. Everything stored in S3 is keys with prefixes.
+

@@ -1,0 +1,26 @@
+Steps to launch an EC2 instance
+1.	Sign in to the preview version of the AWS Management Console.
+2.	Open the Amazon EC2 console by choosing EC2 under Compute.
+If you are using the Show All Services view, your screen looks like this:
+ 
+If you are using the Show Categories view, your screen looks like this with Compute expanded:
+ 
+3.	From the Amazon EC2 dashboard, choose Launch Instance.
+ 
+4.	The Choose an Amazon Machine Image (AMI) page displays a list of basic configurations called Amazon Machine Images (AMIs) that serve as templates for your instance. Select the HVM edition of the Amazon Linux AMI. Notice that this configuration is marked Free tier eligible.
+ 
+5.	On the Choose an Instance Type page, choose t.2micro as the hardware configuration of your instance and Review and Launch.
+Note
+T2 instances, such as t2.micro, must be launched into a virtual private cloud (VPC). If you don't have a VPC, you can let the wizard create one for you. For more information, see step 6 in Launching an Instance.
+ 
+6.	On the Review Instance Launch page, choose Launch.
+Note
+On the Review Instance Launch page, under Security Groups, you see that the wizard created and selected a security group for you. For the purposes of this quick start, no further action than what is described in step 6 above is necessary. For more information about how to create or configure a security group and define firewall rules for your instance, see step 9 in Launching an Instance.
+ 
+7.	In the Select an existing key pair or create a new key pair dialog box, choose Create a new key pair, enter a name for the key pair, and then choose Download Key Pair. This is the only chance for you to save the private key file, so be sure to download it. Save the private key file in a safe place. You can use C:\user\yourusername\.ssh\myfirstkey.pem if you are on a Windows machine, and ~/.ssh/myfirstkey.pem if you are on a Mac or Linux machine. You need to provide the name of your key pair when you launch an instance, and the corresponding private key each time you connect to the instance.
+Note
+A key pair enables you to connect to a Linux instance through SSH. If you launch your instance without a key pair, then you can't connect to it. We recommend against choosing the Proceed without a key pair option.
+When you are ready, select the acknowledgment check box, and then choose Launch Instances.
+ 
+8.	A confirmation page lets you know that your instance is launching. Choose View Instances to close the confirmation page and return to the console.
+

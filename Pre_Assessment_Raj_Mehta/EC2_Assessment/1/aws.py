@@ -47,7 +47,7 @@ time.sleep(180)
 
 
 ec2.stop_instances(InstanceIds=instances)
-print('terminated your instances: ' + str(instances))
+print('stopped your instances: ' + str(instances))
 
 time.sleep(180)
 
